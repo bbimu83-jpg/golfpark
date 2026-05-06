@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GolfPark — 골프채 완전 가이드</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f4ef;
+  --dark: #0d1a0d;
+  --green: #2d6a3f;
+  --green2: #4a9c5a;
+  --green3: #c8e6c9;
+  --gold: #b8860b;
+  --gold2: #d4a843;
+  --cream: #fdf9f2;
+  --text: #1a1a1a;
+  --muted: #7a7a6e;
+  --border: #e0ddd5;
+  --surface: #ffffff;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Noto Sans KR',sans-serif; overflow-x:hidden; }
+
+.page { display:none; min-height:100vh; }
+.page.active { display:block; }
+
+/* ── HOME ── */
+#home { background:var(--dark); position:relative; overflow:hidden; }
+.home-bg { position:absolute; inset:0; background:radial-gradient(ellipse 120% 80% at 50% -10%, #1a3d1a 0%, #0d1a0d 60%); }
+.home-bg::before { content:''; position:absolute; inset:0; background-image:repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(255,255,255,0.015) 60px,rgba(255,255,255,0.015) 61px),repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(255,255,255,0.015) 60px,rgba(255,255,255,0.015) 61px); }
+
+.home-nav { position:relative; z-index:10; display:flex; align-items:center; justify-content:space-between; padding:1.5rem 2rem; }
+.site-logo { font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:900; color:#fff; letter-spacing:-0.02em; }
+.site-logo span { color:var(--gold2); }
+.community-nav-btn { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:20px; color:#fff; font-family:'Noto Sans KR',sans-serif; font-size:0.85rem; font-weight:700; padding:0.5rem 1.2rem; cursor:pointer; transition:all 0.2s; }
+.community-nav-btn:hover { background:rgba(255,255,255,0.2); }
+
+.home-hero { position:relative; z-index:5; text-align:center; padding:2rem 2rem 0; }
+.home-tagline { display:inline-block; border:1px solid rgba(255,255,255,0.2); border-radius:20px; padding:0.35rem 1.2rem; font-size:0.72rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold2); margin-bottom:1.2rem; }
+.home-title { font-family:'Playfair Display',serif; font-size:clamp(2.2rem,7vw,4.5rem); font-weight:900; line-height:1.05; color:#fff; margin-bottom:0.8rem; }
+.home-title em { color:var(--gold2); font-style:italic; }
+.home-sub { color:rgba(255,255,255,0.5); font-size:0.95rem; margin-bottom:3rem; }
+
+.gender-split { position:relative; z-index:5; display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; max-width:900px; margin:0 auto; padding:0 2rem 4rem; }
+.gender-card { border-radius:24px; overflow:hidden; cursor:pointer; position:relative; transition:transform 0.35s cubic-bezier(.2,.8,.2,1),box-shadow 0.35s; border:1px solid rgba(255,255,255,0.08); }
+.gender-card:hover { transform:translateY(-8px) scale(1.02); box-shadow:0 32px 64px rgba(0,0,0,0.5); }
+.gender-card-inner { padding:2.5rem 2rem 2rem; display:flex; flex-direction:column; align-items:center; min-height:420px; position:relative; }
+.card-men { background:linear-gradient(160deg,#0d2137 0%,#1a3a5c 40%,#0d2a1a 100%); }
+.card-women { background:linear-gradient(160deg,#2a0d1a 0%,#5c1a3a 40%,#1a0d2a 100%); }
+.golfer-svg { width:200px; height:240px; margin:1rem auto; display:block; }
+.gender-label { font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:900; color:#fff; margin-top:0.5rem; }
+.gender-sub { color:rgba(255,255,255,0.5); font-size:0.8rem; margin-top:0.3rem; }
+.gender-arrow { margin-top:1.5rem; width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.2rem; background:rgba(255,255,255,0.1); transition:transform 0.2s; }
+.gender-card:hover .gender-arrow { transform:translateX(4px); }
+
+/* ── INNER NAV ── */
+.inner-nav { background:var(--dark); display:flex; align-items:center; justify-content:space-between; padding:1rem 2rem; }
+.inner-nav-left { display:flex; align-items:center; gap:1rem; }
+.back-btn { background:none; border:1px solid rgba(255,255,255,0.2); border-radius:20px; color:rgba(255,255,255,0.7); font-size:0.8rem; padding:0.4rem 1rem; cursor:pointer; font-family:'Noto Sans KR',sans-serif; transition:all 0.2s; }
+.back-btn:hover { background:rgba(255,255,255,0.1); color:#fff; }
+.breadcrumb { color:rgba(255,255,255,0.4); font-size:0.8rem; }
+.breadcrumb span { color:rgba(255,255,255,0.8); }
+.community-btn-small { background:var(--green); border:none; border-radius:20px; color:#fff; font-family:'Noto Sans KR',sans-serif; font-size:0.8rem; font-weight:700; padding:0.4rem 1rem; cursor:pointer; }
+
+/* ── GENDER PAGE ── */
+#gender-page { background:var(--cream); }
+.gender-hero { padding:3rem 2rem 2rem; text-align:center; }
+.gender-hero-men { background:linear-gradient(135deg,#0d2137,#1a3a5c); }
+.gender-hero-women { background:linear-gradient(135deg,#2a0d1a,#5c1a3a); }
+.gender-hero h2 { font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:900; color:#fff; }
+.gender-hero p { color:rgba(255,255,255,0.5); margin-top:0.5rem; }
+.brands-section { max-width:1000px; margin:0 auto; padding:3rem 2rem; }
+.brands-section h3 { font-size:0.75rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-bottom:1.5rem; border-bottom:1px solid var(--border); padding-bottom:0.75rem; }
+.brands-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:1rem; }
+.brand-logo-card { background:var(--surface); border:2px solid var(--border); border-radius:16px; padding:1.5rem 1rem; text-align:center; cursor:pointer; transition:all 0.25s; display:flex; flex-direction:column; align-items:center; gap:0.75rem; }
+.brand-logo-card:hover { border-color:var(--green2); transform:translateY(-4px); box-shadow:0 12px 32px rgba(45,106,63,0.15); }
+.brand-logo-svg { width:80px; height:50px; display:flex; align-items:center; justify-content:center; }
+.brand-logo-name { font-weight:700; font-size:0.85rem; }
+.brand-logo-origin { font-size:0.7rem; color:var(--muted); }
+.brand-logo-count { background:var(--green3); color:var(--green); border-radius:10px; font-size:0.68rem; font-weight:700; padding:0.15rem 0.5rem; }
+
+/* ── BRAND PAGE ── */
+#brand-page { background:var(--bg); }
+.brand-hero { background:var(--dark); padding:2rem; display:flex; align-items:center; gap:1.5rem; }
+.brand-hero-logo { width:80px; height:50px; display:flex; align-items:center; justify-content:center; }
+.brand-hero-info h2 { font-family:'Playfair Display',serif; font-size:1.8rem; color:#fff; }
+.brand-hero-info p { color:rgba(255,255,255,0.4); font-size:0.8rem; }
+.type-tabs { display:flex; gap:0.5rem; padding:1.5rem 2rem 0; overflow-x:auto; max-width:1000px; margin:0 auto; }
+.type-tab { background:var(--surface); border:2px solid var(--border); border-radius:20px; padding:0.45rem 1.1rem; font-family:'Noto Sans KR',sans-serif; font-size:0.82rem; font-weight:700; cursor:pointer; white-space:nowrap; transition:all 0.2s; color:var(--muted); }
+.type-tab:hover { border-color:var(--green2); color:var(--green); }
+.type-tab.active { background:var(--green); border-color:var(--green); color:#fff; }
+.clubs-list { max-width:1000px; margin:0 auto; padding:1.5rem 2rem 4rem; display:grid; gap:1rem; }
+
+.club-detail-card { background:var(--surface); border:1px solid var(--border); border-radius:20px; overflow:hidden; }
+.club-card-header { padding:1.5rem 1.5rem 1rem; display:flex; align-items:flex-start; justify-content:space-between; border-bottom:1px solid var(--border); }
+.club-card-title h4 { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:700; }
+.club-card-title p { color:var(--muted); font-size:0.8rem; margin-top:0.2rem; }
+.club-year-badge { background:var(--green3); color:var(--green); border-radius:8px; font-size:0.72rem; font-weight:700; padding:0.25rem 0.65rem; }
+.specs-wrap { padding:1.5rem; }
+.specs-title { font-size:0.7rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-bottom:1rem; }
+.specs-row { display:grid; grid-template-columns:repeat(3,1fr); gap:0.75rem; margin-bottom:0.75rem; }
+.spec-box { background:var(--bg); border-radius:12px; padding:1rem; text-align:center; }
+.spec-icon { font-size:1.4rem; margin-bottom:0.4rem; }
+.spec-name { font-size:0.62rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); margin-bottom:0.3rem; }
+.spec-val { font-size:0.95rem; font-weight:700; }
+.dist-section { padding:0 1.5rem 1rem; }
+.dist-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem; }
+.dist-label { font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); }
+.dist-range { font-size:1.1rem; font-weight:900; color:var(--green); }
+.dist-bar { height:8px; background:var(--border); border-radius:4px; overflow:hidden; }
+.dist-fill { height:100%; border-radius:4px; background:linear-gradient(90deg,var(--green),var(--gold2)); }
+.dist-scale { display:flex; justify-content:space-between; margin-top:0.3rem; font-size:0.65rem; color:var(--muted); }
+.club-tip { margin:0 1.5rem 1.5rem; background:linear-gradient(135deg,#f0f7f1,#e8f4e8); border-left:3px solid var(--green2); border-radius:0 12px 12px 0; padding:0.9rem 1rem; font-size:0.82rem; color:var(--green); line-height:1.6; }
+
+/* ── COMMUNITY PAGE ── */
+#community-page { background:var(--bg); }
+.community-hero { background:linear-gradient(135deg,#0d2137,#1a3d1a); padding:3rem 2rem; text-align:center; }
+.community-hero h2 { font-family:'Playfair Display',serif; font-size:2.2rem; color:#fff; font-weight:900; }
+.community-hero p { color:rgba(255,255,255,0.5); margin-top:0.5rem; }
+
+.community-wrap { max-width:900px; margin:0 auto; padding:2rem; }
+
+/* 카테고리 탭 */
+.cat-tabs { display:flex; gap:0.5rem; margin-bottom:1.5rem; flex-wrap:wrap; }
+.cat-tab { background:var(--surface); border:2px solid var(--border); border-radius:20px; padding:0.5rem 1.2rem; font-family:'Noto Sans KR',sans-serif; font-size:0.82rem; font-weight:700; cursor:pointer; transition:all 0.2s; color:var(--muted); }
+.cat-tab:hover { border-color:var(--green2); color:var(--green); }
+.cat-tab.active { background:var(--green); border-color:var(--green); color:#fff; }
+
+/* 글쓰기 박스 */
+.write-box { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:1.5rem; margin-bottom:1.5rem; }
+.write-box h3 { font-size:0.85rem; font-weight:700; color:var(--muted); margin-bottom:1rem; text-transform:uppercase; letter-spacing:0.08em; }
+.write-row { display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:0.75rem; }
+.write-input { width:100%; background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:0.75rem 1rem; color:var(--text); font-family:'Noto Sans KR',sans-serif; font-size:0.9rem; transition:border-color 0.2s; }
+.write-input:focus { outline:none; border-color:var(--green2); }
+.write-select { width:100%; background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:0.75rem 1rem; color:var(--text); font-family:'Noto Sans KR',sans-serif; font-size:0.9rem; cursor:pointer; }
+.write-title { margin-bottom:0.75rem; }
+.write-body { min-height:100px; resize:vertical; margin-bottom:0.75rem; }
+.write-footer { display:flex; align-items:center; justify-content:space-between; }
+.char-count { font-size:0.75rem; color:var(--muted); }
+.submit-btn { background:linear-gradient(135deg,var(--green),var(--green2)); border:none; border-radius:8px; color:#fff; font-family:'Noto Sans KR',sans-serif; font-weight:700; font-size:0.9rem; padding:0.65rem 1.5rem; cursor:pointer; transition:opacity 0.2s; }
+.submit-btn:hover { opacity:0.85; }
+.submit-btn:disabled { opacity:0.5; cursor:not-allowed; }
+
+/* 게시글 목록 */
+.posts-list { display:flex; flex-direction:column; gap:0.75rem; }
+.post-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:1.25rem; transition:border-color 0.2s; cursor:pointer; }
+.post-card:hover { border-color:var(--green2); }
+.post-header { display:flex; align-items:center; gap:0.75rem; margin-bottom:0.75rem; }
+.avatar { width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.85rem; font-weight:700; color:#fff; flex-shrink:0; }
+.post-meta { flex:1; }
+.post-author { font-size:0.85rem; font-weight:700; }
+.post-date { font-size:0.72rem; color:var(--muted); }
+.post-category-badge { font-size:0.65rem; font-weight:700; padding:0.2rem 0.6rem; border-radius:8px; background:var(--green3); color:var(--green); }
+.post-title { font-weight:700; font-size:0.95rem; margin-bottom:0.4rem; }
+.post-body-preview { font-size:0.83rem; color:var(--muted); line-height:1.6; margin-bottom:0.75rem; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
+.post-footer { display:flex; gap:1rem; }
+.post-stat { font-size:0.75rem; color:var(--muted); }
+
+/* 로딩/빈상태 */
+.loading-box { text-align:center; padding:3rem; color:var(--muted); }
+.loading-spinner { width:32px; height:32px; border:3px solid var(--border); border-top-color:var(--green); border-radius:50%; animation:spin 0.8s linear infinite; margin:0 auto 1rem; }
+@keyframes spin { to { transform:rotate(360deg); } }
+.empty-box { text-align:center; padding:3rem; color:var(--muted); }
+.empty-icon { font-size:3rem; margin-bottom:1rem; }
+
+/* 게시글 상세 */
+#post-detail-page { background:var(--bg); }
+.post-detail-wrap { max-width:800px; margin:0 auto; padding:2rem; }
+.post-detail-header { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:2rem; margin-bottom:1rem; }
+.post-detail-cat { display:inline-block; background:var(--green3); color:var(--green); border-radius:8px; font-size:0.72rem; font-weight:700; padding:0.25rem 0.65rem; margin-bottom:1rem; }
+.post-detail-title { font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:700; margin-bottom:1rem; line-height:1.3; }
+.post-detail-meta { display:flex; gap:1rem; color:var(--muted); font-size:0.8rem; padding-top:1rem; border-top:1px solid var(--border); }
+.post-detail-body { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:2rem; margin-bottom:1.5rem; font-size:0.95rem; line-height:1.8; white-space:pre-wrap; }
+
+/* 댓글 */
+.comments-box { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:1.5rem; }
+.comments-title { font-size:0.8rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); margin-bottom:1.25rem; }
+.comment-form { display:flex; gap:0.75rem; margin-bottom:1.5rem; }
+.comment-avatar { width:36px; height:36px; border-radius:50%; background:var(--green3); display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
+.comment-input-wrap { flex:1; }
+.comment-name-input { width:100%; background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:0.55rem 0.9rem; font-family:'Noto Sans KR',sans-serif; font-size:0.82rem; color:var(--text); margin-bottom:0.5rem; transition:border-color 0.2s; }
+.comment-name-input:focus { outline:none; border-color:var(--green2); }
+.comment-textarea { width:100%; background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:0.65rem 1rem; font-family:'Noto Sans KR',sans-serif; font-size:0.85rem; color:var(--text); resize:none; transition:border-color 0.2s; min-height:70px; }
+.comment-textarea:focus { outline:none; border-color:var(--green2); }
+.comment-submit { margin-top:0.5rem; background:var(--green); border:none; border-radius:8px; color:#fff; font-family:'Noto Sans KR',sans-serif; font-size:0.8rem; font-weight:700; padding:0.45rem 1rem; cursor:pointer; }
+.comment-item { display:flex; gap:0.75rem; margin-bottom:1rem; padding-bottom:1rem; border-bottom:1px solid var(--border); }
+.comment-item:last-child { border-bottom:none; margin-bottom:0; }
+.comment-bubble { flex:1; background:var(--bg); border-radius:0 12px 12px 12px; padding:0.75rem 1rem; }
+.comment-meta { display:flex; gap:0.75rem; align-items:center; margin-bottom:0.3rem; }
+.comment-author { font-size:0.8rem; font-weight:700; }
+.comment-date { font-size:0.7rem; color:var(--muted); }
+.comment-text { font-size:0.85rem; line-height:1.6; }
+
+/* ── 리뷰 섹션 ── */
+.review-section { border-top:1px solid var(--border); }
+.review-header { display:flex; align-items:center; justify-content:space-between; padding:1rem 1.5rem; }
+.review-title { font-size:0.82rem; font-weight:700; color:var(--text); }
+.review-toggle-btn { background:none; border:1px solid var(--border); border-radius:16px; font-family:"Noto Sans KR",sans-serif; font-size:0.75rem; color:var(--muted); padding:0.3rem 0.9rem; cursor:pointer; transition:all 0.2s; }
+.review-toggle-btn:hover { border-color:var(--green2); color:var(--green); }
+.review-body { padding:0 1.5rem 1.5rem; border-top:1px solid var(--border); }
+.review-write { background:var(--bg); border-radius:12px; padding:1rem; margin:1rem 0; }
+.review-write-top { display:flex; gap:0.75rem; align-items:center; margin-bottom:0.75rem; }
+.review-input-name { flex:1; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:0.55rem 0.9rem; font-family:"Noto Sans KR",sans-serif; font-size:0.82rem; color:var(--text); }
+.review-input-name:focus { outline:none; border-color:var(--green2); }
+.star-select { display:flex; gap:0.2rem; }
+.star { font-size:1.3rem; cursor:pointer; color:#ddd; transition:color 0.15s; user-select:none; }
+.star.on { color:#f5a623; }
+.review-input-text { width:100%; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:0.65rem 1rem; font-family:"Noto Sans KR",sans-serif; font-size:0.85rem; color:var(--text); resize:none; margin-bottom:0.75rem; }
+.review-input-text:focus { outline:none; border-color:var(--green2); }
+.review-submit-btn { background:var(--green); border:none; border-radius:8px; color:#fff; font-family:"Noto Sans KR",sans-serif; font-size:0.8rem; font-weight:700; padding:0.45rem 1.1rem; cursor:pointer; }
+.review-item { display:flex; gap:0.75rem; padding:0.75rem 0; border-bottom:1px solid var(--border); }
+.review-item:last-child { border-bottom:none; }
+.review-bubble { flex:1; }
+.review-meta { display:flex; gap:0.75rem; align-items:center; margin-bottom:0.3rem; }
+.review-author { font-size:0.82rem; font-weight:700; }
+.review-stars { color:#f5a623; font-size:0.85rem; }
+.review-date { font-size:0.7rem; color:var(--muted); }
+.review-text { font-size:0.85rem; line-height:1.6; }
+
+/* 알림 토스트 */
+.toast { position:fixed; bottom:2rem; left:50%; transform:translateX(-50%) translateY(100px); background:var(--dark); color:#fff; padding:0.75rem 1.5rem; border-radius:20px; font-size:0.85rem; font-weight:700; transition:transform 0.3s; z-index:1000; }
+.toast.show { transform:translateX(-50%) translateY(0); }
+
+@media(max-width:600px) {
+  .gender-split { grid-template-columns:1fr; }
+  .specs-row { grid-template-columns:repeat(2,1fr); }
+  .write-row { grid-template-columns:1fr; }
+}
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.fade-up { animation:fadeUp 0.5s ease both; }
+</style>
+</head>
+<body>
+
+<!-- ══ HOME ══ -->
+<div id="home" class="page active">
+  <div class="home-bg"></div>
+  <nav class="home-nav">
+    <div class="site-logo">Golf<span>Park</span></div>
+    <button class="community-nav-btn" onclick="showPage('community-page')">💬 커뮤니티</button>
+  </nav>
+  <div class="home-hero fade-up">
+    <div class="home-tagline">🏌️ 한국 시판 골프채 완전 가이드</div>
+    <h1 class="home-title">당신의 게임을<br><em>바꿀 클럽</em>을 찾아보세요</h1>
+    <p class="home-sub">브랜드별 스펙 · 비거리 · 초보자 팁까지 한눈에</p>
+  </div>
+  <div class="gender-split">
+    <div class="gender-card" onclick="goGender('men')">
+      <div class="gender-card-inner card-men">
+        <svg class="golfer-svg" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="100" cy="225" rx="45" ry="6" fill="rgba(0,0,0,0.3)"/>
+          <rect x="72" y="105" width="56" height="62" rx="12" fill="#1e4d7a"/>
+          <path d="M88 105 L100 118 L112 105" stroke="white" stroke-width="2" fill="none"/>
+          <path d="M72 115 Q40 85 28 60" stroke="#f5c99a" stroke-width="14" stroke-linecap="round" fill="none"/>
+          <path d="M128 120 Q148 140 158 158" stroke="#f5c99a" stroke-width="14" stroke-linecap="round" fill="none"/>
+          <line x1="158" y1="158" x2="168" y2="205" stroke="#c0c0c0" stroke-width="3" stroke-linecap="round"/>
+          <rect x="162" y="203" width="14" height="6" rx="2" fill="#888"/>
+          <circle cx="100" cy="78" r="26" fill="#f5c99a"/>
+          <path d="M76 68 Q78 50 100 48 Q122 50 124 68 Q115 58 100 58 Q85 58 76 68Z" fill="#3a2010"/>
+          <circle cx="92" cy="76" r="2.5" fill="#333"/>
+          <circle cx="108" cy="76" r="2.5" fill="#333"/>
+          <path d="M94 86 Q100 91 106 86" stroke="#c07050" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <ellipse cx="74" cy="80" rx="4" ry="6" fill="#e8b88a"/>
+          <ellipse cx="126" cy="80" rx="4" ry="6" fill="#e8b88a"/>
+          <path d="M74 63 Q76 44 100 42 Q124 44 126 63 Z" fill="#1a3d6e"/>
+          <rect x="70" y="60" width="60" height="8" rx="4" fill="#1a3d6e"/>
+          <rect x="65" y="64" width="16" height="5" rx="2.5" fill="#1a3d6e"/>
+          <rect x="72" y="162" width="24" height="50" rx="8" fill="#2d4a6e"/>
+          <rect x="104" y="162" width="24" height="50" rx="8" fill="#2d4a6e"/>
+          <ellipse cx="84" cy="212" rx="16" ry="7" fill="#222"/>
+          <ellipse cx="116" cy="212" rx="16" ry="7" fill="#222"/>
+          <rect x="72" y="160" width="56" height="6" rx="3" fill="#8B6914"/>
+          <rect x="96" y="160" width="8" height="6" rx="1" fill="#c9a84c"/>
+        </svg>
+        <div class="gender-label">남성 골프채</div>
+        <div class="gender-sub">Men's Golf Clubs</div>
+        <div class="gender-arrow">→</div>
+      </div>
+    </div>
+    <div class="gender-card" onclick="goGender('women')">
+      <div class="gender-card-inner card-women">
+        <svg class="golfer-svg" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="100" cy="225" rx="45" ry="6" fill="rgba(0,0,0,0.3)"/>
+          <path d="M78 162 Q80 205 68 215 Q85 218 100 217 Q115 218 132 215 Q120 205 122 162 Z" fill="#e75480"/>
+          <rect x="76" y="105" width="48" height="60" rx="10" fill="#ff6b9d"/>
+          <path d="M90 105 L100 120 L110 105" stroke="white" stroke-width="1.5" fill="#e75480"/>
+          <path d="M76 115 Q50 95 35 72" stroke="#f5c99a" stroke-width="13" stroke-linecap="round" fill="none"/>
+          <path d="M124 118 Q145 135 155 155" stroke="#f5c99a" stroke-width="13" stroke-linecap="round" fill="none"/>
+          <line x1="155" y1="155" x2="163" y2="205" stroke="#c0c0c0" stroke-width="2.5" stroke-linecap="round"/>
+          <rect x="158" y="203" width="12" height="5" rx="2" fill="#888"/>
+          <circle cx="100" cy="76" r="24" fill="#f5c99a"/>
+          <path d="M78 70 Q70 100 72 130 Q80 125 82 108 Q80 90 84 78 Z" fill="#3a1a05"/>
+          <path d="M122 70 Q130 100 128 130 Q120 125 118 108 Q120 90 116 78 Z" fill="#3a1a05"/>
+          <path d="M78 65 Q80 46 100 44 Q120 46 122 65 Q112 56 100 56 Q88 56 78 65Z" fill="#3a1a05"/>
+          <circle cx="93" cy="75" r="2.5" fill="#333"/>
+          <circle cx="107" cy="75" r="2.5" fill="#333"/>
+          <path d="M95 85 Q100 90 105 85" stroke="#e05080" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <circle cx="88" cy="82" r="5" fill="rgba(255,150,150,0.3)"/>
+          <circle cx="112" cy="82" r="5" fill="rgba(255,150,150,0.3)"/>
+          <path d="M78 62 Q80 44 100 42 Q120 44 122 62" fill="#c0006e"/>
+          <rect x="74" y="60" width="52" height="7" rx="3.5" fill="#c0006e"/>
+          <rect x="66" y="63" width="18" height="5" rx="2.5" fill="#c0006e"/>
+          <rect x="78" y="210" width="18" height="20" rx="6" fill="#f5c99a"/>
+          <rect x="104" y="210" width="18" height="20" rx="6" fill="#f5c99a"/>
+          <ellipse cx="87" cy="230" rx="14" ry="6" fill="#fff"/>
+          <ellipse cx="113" cy="230" rx="14" ry="6" fill="#fff"/>
+        </svg>
+        <div class="gender-label">여성 골프채</div>
+        <div class="gender-sub">Women's Golf Clubs</div>
+        <div class="gender-arrow">→</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ GENDER PAGE ══ -->
+<div id="gender-page" class="page">
+  <div class="inner-nav">
+    <div class="inner-nav-left">
+      <button class="back-btn" onclick="goHome()">← 홈으로</button>
+      <span class="breadcrumb">홈 / <span id="gender-breadcrumb"></span></span>
+    </div>
+    <button class="community-btn-small" onclick="showPage('community-page')">💬 커뮤니티</button>
+  </div>
+  <div class="gender-hero" id="gender-hero">
+    <h2 id="gender-title"></h2>
+    <p id="gender-desc"></p>
+  </div>
+  <div class="brands-section">
+    <h3>브랜드 선택 — 로고를 클릭하세요</h3>
+    <div class="brands-grid" id="brands-grid"></div>
+  </div>
+</div>
+
+<!-- ══ BRAND PAGE ══ -->
+<div id="brand-page" class="page">
+  <div class="inner-nav">
+    <div class="inner-nav-left">
+      <button class="back-btn" onclick="goBrandBack()">← 브랜드 목록</button>
+      <span class="breadcrumb">홈 / <span id="brand-breadcrumb-g"></span> / <span id="brand-breadcrumb-b"></span></span>
+    </div>
+    <button class="community-btn-small" onclick="showPage('community-page')">💬 커뮤니티</button>
+  </div>
+  <div class="brand-hero">
+    <div class="brand-hero-logo" id="brand-hero-logo"></div>
+    <div class="brand-hero-info">
+      <h2 id="brand-hero-name"></h2>
+      <p id="brand-hero-origin"></p>
+    </div>
+  </div>
+  <div style="max-width:1000px;margin:0 auto">
+    <div class="type-tabs" id="type-tabs"></div>
+    <div class="clubs-list" id="clubs-list"></div>
+  </div>
+</div>
+
+<!-- ══ COMMUNITY PAGE ══ -->
+<div id="community-page" class="page">
+  <div class="inner-nav">
+    <div class="inner-nav-left">
+      <button class="back-btn" onclick="goHome()">← 홈으로</button>
+      <span class="breadcrumb">홈 / <span>커뮤니티</span></span>
+    </div>
+  </div>
+  <div class="community-hero">
+    <h2>⛳ GolfPark 커뮤니티</h2>
+    <p>골프에 대해 자유롭게 이야기 나눠요</p>
+  </div>
+  <div class="community-wrap">
+    <!-- 카테고리 탭 -->
+    <div class="cat-tabs">
+      <button class="cat-tab active" onclick="selectCat('전체',this)">📋 전체</button>
+      <button class="cat-tab" onclick="selectCat('자유게시판',this)">💬 자유게시판</button>
+      <button class="cat-tab" onclick="selectCat('레슨게시판',this)">🏌️ 레슨게시판</button>
+      <button class="cat-tab" onclick="selectCat('장비게시판',this)">⭐ 장비게시판</button>
+      <button class="cat-tab" onclick="selectCat('코스게시판',this)">📍 코스게시판</button>
+    </div>
+
+    <!-- 글쓰기 박스 -->
+    <div class="write-box">
+      <h3>✏️ 글 작성하기</h3>
+      <div class="write-row">
+        <input class="write-input" id="write-author" placeholder="닉네임" maxlength="20">
+        <select class="write-select" id="write-category">
+          <option value="자유게시판">💬 자유게시판</option>
+          <option value="레슨게시판">🏌️ 레슨게시판</option>
+          <option value="장비게시판">⭐ 장비게시판</option>
+          <option value="코스게시판">📍 코스게시판</option>
+        </select>
+      </div>
+      <input class="write-input write-title" id="write-title" placeholder="제목을 입력하세요" maxlength="100">
+      <div style="margin-bottom:0.75rem"></div>
+      <textarea class="write-input write-body" id="write-body" placeholder="내용을 자유롭게 작성해주세요..."></textarea>
+      <div class="write-footer">
+        <span class="char-count" id="char-count">0 / 1000</span>
+        <button class="submit-btn" id="submit-btn" onclick="submitPost()">게시하기 →</button>
+      </div>
+    </div>
+
+    <!-- 게시글 목록 -->
+    <div id="posts-container">
+      <div class="loading-box">
+        <div class="loading-spinner"></div>
+        <p>게시글을 불러오는 중...</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ POST DETAIL PAGE ══ -->
+<div id="post-detail-page" class="page">
+  <div class="inner-nav">
+    <div class="inner-nav-left">
+      <button class="back-btn" onclick="showPage('community-page');loadPosts()">← 목록으로</button>
+      <span class="breadcrumb">홈 / 커뮤니티 / <span>게시글</span></span>
+    </div>
+  </div>
+  <div class="post-detail-wrap">
+    <div id="post-detail-content"></div>
+  </div>
+</div>
+
+<!-- 토스트 알림 -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ══ SUPABASE 설정 ══
+const SUPABASE_URL = 'https://dotjtqtyuualeoozfrbz.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_32vGfxI3IzdhUSVdmxGEYQ_O-4Obbrh';
+
+async function supabase(method, table, data = null, filter = '') {
+  const url = `${SUPABASE_URL}/rest/v1/${table}${filter}`;
+  const headers = {
+    'apikey': SUPABASE_KEY,
+    'Authorization': `Bearer ${SUPABASE_KEY}`,
+    'Content-Type': 'application/json',
+    'Prefer': method === 'POST' ? 'return=representation' : '',
+  };
+  const options = { method, headers };
+  if (data) options.body = JSON.stringify(data);
+  const res = await fetch(url, options);
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(err);
+  }
+  return method === 'DELETE' ? null : res.json();
+}
+
+// ══ 상태 ══
+let currentGender = 'men';
+let currentBrand = '';
+let currentType = '';
+let currentCat = '전체';
+let currentPostId = null;
+
+// ══ 페이지 전환 ══
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+function goHome() { showPage('home'); }
+function goBrandBack() { showPage('gender-page'); }
+
+// ══ 토스트 ══
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ══ HOME ══
+function goGender(gender) {
+  currentGender = gender;
+  document.getElementById('gender-breadcrumb').textContent = gender === 'men' ? '남성 골프채' : '여성 골프채';
+  const hero = document.getElementById('gender-hero');
+  hero.className = 'gender-hero ' + (gender === 'men' ? 'gender-hero-men' : 'gender-hero-women');
+  document.getElementById('gender-title').textContent = gender === 'men' ? '👨 남성 골프채' : '👩 여성 골프채';
+  document.getElementById('gender-desc').textContent = gender === 'men' ? '브랜드를 선택하면 클럽 목록을 볼 수 있어요' : '여성 전용 클럽을 브랜드별로 비교해보세요';
+  renderBrands(gender);
+  showPage('gender-page');
+}
+
+// ══ 브랜드 데이터 ══
+const brandsData = {
+  men: [
+    { id:'taylormade', name:'TaylorMade', origin:'🇺🇸 미국', color:'#1a1a2e', textColor:'#fff' },
+    { id:'callaway',   name:'Callaway',   origin:'🇺🇸 미국', color:'#002868', textColor:'#fff' },
+    { id:'ping',       name:'PING',       origin:'🇺🇸 미국', color:'#003087', textColor:'#fff' },
+    { id:'titleist',   name:'Titleist',   origin:'🇺🇸 미국', color:'#001f5b', textColor:'#fff' },
+    { id:'mizuno',     name:'Mizuno',     origin:'🇯🇵 일본', color:'#003087', textColor:'#fff' },
+    { id:'srixon',     name:'Srixon',     origin:'🇯🇵 일본', color:'#0a0a0a', textColor:'#fff' },
+    { id:'cobra',      name:'Cobra',      origin:'🇺🇸 미국', color:'#1a1a1a', textColor:'#f5a623' },
+    { id:'cleveland',  name:'Cleveland',  origin:'🇺🇸 미국', color:'#cc0000', textColor:'#fff' },
+  ],
+  women: [
+    { id:'honma',       name:'HONMA',      origin:'🇯🇵 일본', color:'#8B0000', textColor:'#d4a843' },
+    { id:'callaway_w',  name:'Callaway',   origin:'🇺🇸 미국', color:'#002868', textColor:'#fff' },
+    { id:'taylormade_w',name:'TaylorMade', origin:'🇺🇸 미국', color:'#1a1a2e', textColor:'#fff' },
+    { id:'ping_w',      name:'PING',       origin:'🇺🇸 미국', color:'#003087', textColor:'#fff' },
+    { id:'mizuno_w',    name:'Mizuno',     origin:'🇯🇵 일본', color:'#003087', textColor:'#fff' },
+    { id:'yamaha',      name:'YAMAHA',     origin:'🇯🇵 일본', color:'#1a1a1a', textColor:'#e60012' },
+    { id:'xxio',        name:'XXIO',       origin:'🇯🇵 일본', color:'#b8860b', textColor:'#fff' },
+    { id:'pxg_w',       name:'PXG',        origin:'🇺🇸 미국', color:'#111',    textColor:'#c9a84c' },
+  ]
+};
+
+function makeBrandLogo(b) {
+  const logos = {
+    taylormade:`<svg viewBox="0 0 80 50" width="80" height="50"><rect width="80" height="50" rx="6" fill="#1a1a2e"/><text x="40" y="20" text-anchor="middle" fill="white" font-size="7" font-weight="900" font-family="Arial">TaylorMade</text><text x="40" y="35" text-anchor="middle" fill="#d4a843" font-size="11" font-weight="900" font-family="Arial">TM</text></svg>`,
+    taylormade_w:`<svg viewBox="0 0 80 50" width="80" height="50"><rect width="80" height="50" rx="6" fill="#1a1a2e"/><text x="40" y="20" text-anchor="middle" fill="white" font-size="7" font-weight="900" font-family="Arial">TaylorMade</text><text x="40" y="35" text-anchor="middle" fill="#d4a843" font-size="11" font-weight="900" font-family="Arial">TM</text></svg>`,
+    callaway:`<svg viewBox="0 0 80 50" width="80" height="50"><rect width="80" height="50" rx="6" fill="#002868"/><text x="40" y="20" text-anchor="middle" fill="white" font-size="7" font-weight="700" font-family="Arial">CALLAWAY</text><circle cx="40" cy="35" r="8" fill="none" stroke="#d4a843" stroke-width="2"/><text x="40" y="38" text-anchor="middle" fill="#d4a843" font-size="8" font-weight="900" font-family="Arial">C</text></svg>`,
+    callaway_w:`<svg viewBox="0 0 80 50" width="80" height="50"><rect width="80" height="50" rx="6" fill="#002868"/><text x="40" y="20" text-anchor="middle" fill="white" font-size="7" font-weight="700" font-family="Arial">CALLAWAY</text><circle cx="40" cy="35" r="8" fill="none" stroke="#d4a843" stroke-width="2"/><text x="40" y="38" text-anchor="middle" fill="#d4a843" font-size="8" font-weight="900" font-family="Arial">C</text></svg>`,
+    ping:`<svg viewBox="0 0 80 50" width="80" height="50"><rect width="80" height="50" rx="6" fill="#003087"/><text x="40" y="32" text-anchor="middle" fill="white" font-size="20" font-weight="900" font-family="Arial Narrow,Arial">PING</text></svg>`,
+    ping_w:`<svg viewBox="0 0 80 50" width="80" height="50"><rect width="80" height="50" rx="6" fill="#003087"/><text x="40" y="32" text-anchor="middle" fill="white" font-size="20" font-weight="900" font-family="Arial Narrow,Arial">PING</text></svg>`,
+    titleist:`<svg viewBox="0 0 80 50" width="80" height="50"><rect width="80" height="50" rx="6" fill="#001f5b"/><text x="40" y="22" text-anchor="middle" fill="white" font-size="7" font-weight="700" font-family="Arial">TITLEIST</text><rect x="15" y="28" width="50" height="2" fill="#d4a843"/><text x="40" y="40" text-anchor="middle" fill="#d4a843" font-size="8" font-family="Arial">Est. 1932</text></svg>`,
+    mizuno:`<svg viewBox="0 0 80 50" width="80" height="50"><rect width="80" height="50" rx="6" fill="#003087"/><text x="40" y="30" text-anchor="middle" fill="white" font-size="13" font-weight="900" font-family="Arial">MIZUNO</text></svg>`,
+    mizuno_w:`<svg viewBox="0 0 80 50" width="80" height="50"><rect width="80" height="50" rx="6" fill="#003087"/><text x="40" y="30" text-anchor="middle" fill="white" font-size="13" font-weight="900" font-family="Arial">MIZUNO</text></svg>`,
+    srixon:`<svg viewBox="0 0 80 50" width="80" height="50"><rect width="80" height="50" rx="6" fill="#111"/><text x="40" y="30" text-anchor="middle" fill="white" font-size="13" font-weight="900" font-family="Arial">SRIXON</text></svg>`,
+    cobra:`<svg viewBox="0 0 80 50" width="80" height="50"><rect width="80" height="50" rx="6" fill="#1a1a1a"/><text x="40" y="22" text-anchor="middle" fill="#f5a623" font-size="9" font-weight="900" font-family="Arial">🐍 COBRA</text><text x="40" y="38" text-anchor="middle" fill="white" font-size="8" font-family="Arial">GOLF</text></svg>`,
+    cleveland:`<svg viewBox="0 0 80 50" width="80" height="50"><rect width="80" height="50" rx="6" fill="#cc0000"/><text x="40" y="22" text-anchor="middle" fill="white" font-size="8" font-weight="900" font-family="Arial">CLEVELAND</text><text x="40" y="37" text-anchor="middle" fill="white" font-size="8" font-family="Arial">GOLF</text></svg>`,
+    honma:`<svg viewBox="0 0 80 50" width="80" height="50"><rect width="80" height="50" rx="6" fill="#1a0000"/><text x="40" y="20" text-anchor="middle" fill="#d4a843" font-size="9" font-weight="900" font-family="Arial">HONMA</text><rect x="20" y="24" width="40" height="1" fill="#d4a843"/><text x="40" y="38" text-anchor="middle" fill="#d4a843" font-size="7" font-family="Arial">GOLF TOKYO</text></svg>`,
+    yamaha:`<svg viewBox="0 0 80 50" width="80" height="50"><rect width="80" height="50" rx="6" fill="#1a1a1a"/><text x="40" y="24" text-anchor="middle" fill="#e60012" font-size="11" font-weight="900" font-family="Arial">YAMAHA</text><text x="40" y="38" text-anchor="middle" fill="white" font-size="7" font-family="Arial">inpres</text></svg>`,
+    xxio:`<svg viewBox="0 0 80 50" width="80" height="50"><rect width="80" height="50" rx="6" fill="#b8860b"/><text x="40" y="32" text-anchor="middle" fill="white" font-size="18" font-weight="900" font-family="Arial">XXIO</text></svg>`,
+    pxg_w:`<svg viewBox="0 0 80 50" width="80" height="50"><rect width="80" height="50" rx="6" fill="#111"/><text x="40" y="24" text-anchor="middle" fill="#c9a84c" font-size="14" font-weight="900" font-family="Arial">PXG</text><text x="40" y="38" text-anchor="middle" fill="#888" font-size="6.5" font-family="Arial">PARSONS XTREME</text></svg>`,
+  };
+  return logos[b.id] || `<svg viewBox="0 0 80 50" width="80" height="50"><rect width="80" height="50" rx="6" fill="#333"/><text x="40" y="30" text-anchor="middle" fill="white" font-size="12" font-weight="900" font-family="Arial">${b.name}</text></svg>`;
+}
+
+function renderBrands(gender) {
+  const grid = document.getElementById('brands-grid');
+  const brands = brandsData[gender];
+  grid.innerHTML = brands.map(b => {
+    const clubs = clubsData[b.id] || {};
+    const count = Object.values(clubs).flat().length;
+    return `<div class="brand-logo-card" onclick="goBrand('${b.id}')">
+      <div class="brand-logo-svg">${makeBrandLogo(b)}</div>
+      <div class="brand-logo-name">${b.name}</div>
+      <div class="brand-logo-origin">${b.origin}</div>
+      <div class="brand-logo-count">${count}개 클럽</div>
+    </div>`;
+  }).join('');
+}
+
+function goBrand(brandId) {
+  currentBrand = brandId;
+  const genderBrands = brandsData[currentGender];
+  const brandInfo = genderBrands.find(b => b.id === brandId);
+  document.getElementById('brand-breadcrumb-g').textContent = currentGender === 'men' ? '남성' : '여성';
+  document.getElementById('brand-breadcrumb-b').textContent = brandInfo?.name || brandId;
+  document.getElementById('brand-hero-name').textContent = brandInfo?.name || brandId;
+  document.getElementById('brand-hero-origin').textContent = brandInfo?.origin || '';
+  document.getElementById('brand-hero-logo').innerHTML = makeBrandLogo(brandInfo);
+  const clubs = clubsData[brandId] || {};
+  const types = Object.keys(clubs);
+  currentType = types[0] || '';
+  document.getElementById('type-tabs').innerHTML = types.map(t =>
+    `<button class="type-tab ${t===currentType?'active':''}" onclick="selectType('${t}',this)">${typeEmoji(t)} ${t}</button>`
+  ).join('');
+  renderClubs();
+  showPage('brand-page');
+}
+
+function typeEmoji(t) {
+  return {드라이버:'🚀',아이언:'🏌️',페어웨이우드:'🌲',하이브리드:'🔀',유틸리티:'🔀',웨지:'🪙',퍼터:'🎯'}[t]||'🏷️';
+}
+
+function selectType(type, btn) {
+  currentType = type;
+  document.querySelectorAll('.type-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderClubs();
+}
+
+function renderClubs() {
+  const clubs = (clubsData[currentBrand]||{})[currentType]||[];
+  const listEl = document.getElementById('clubs-list');
+  listEl.innerHTML = clubs.map((c,idx) => {
+    const isPutter = c.dist[1]===0;
+    const barPct = isPutter ? 0 : Math.round((c.dist[1]/300)*100);
+    return `<div class="club-detail-card fade-up" style="animation-delay:${idx*0.08}s">
+      <div class="club-card-header">
+        <div class="club-card-title"><h4>${c.name}</h4><p>${currentType} · ${c.shaft}</p></div>
+        <span class="club-year-badge">${c.year}</span>
+      </div>
+      <div class="specs-wrap">
+        <div class="specs-title">📋 스펙 한눈에 보기</div>
+        <div class="specs-row">
+          <div class="spec-box"><div class="spec-icon">⚖️</div><div class="spec-name">헤드 무게</div><div class="spec-val">${c.weight}</div></div>
+          <div class="spec-box"><div class="spec-icon">📐</div><div class="spec-name">로프트각</div><div class="spec-val">${c.loft}</div></div>
+          <div class="spec-box"><div class="spec-icon">🚀</div><div class="spec-name">발사각</div><div class="spec-val">${c.launch}</div></div>
+          <div class="spec-box"><div class="spec-icon">🏹</div><div class="spec-name">탄도</div><div class="spec-val">${c.traj}</div></div>
+          <div class="spec-box" style="grid-column:1/-1"><div class="spec-icon">🪝</div><div class="spec-name">샤프트</div><div class="spec-val" style="font-size:0.82rem">${c.shaft}</div></div>
+        </div>
+      </div>
+      ${!isPutter?`<div class="dist-section">
+        <div class="dist-header"><span class="dist-label">🎯 아마추어 평균 비거리</span><span class="dist-range">${c.dist[0]}m ~ ${c.dist[1]}m</span></div>
+        <div class="dist-bar"><div class="dist-fill" style="width:${barPct}%"></div></div>
+        <div class="dist-scale"><span>0m</span><span>100m</span><span>200m</span><span>300m+</span></div>
+      </div>`:''}
+      <div class="club-tip"><strong>💡 초보자 TIP</strong><br>${c.tip}</div>
+      <div class="review-section">
+        <div class="review-header">
+          <span class="review-title">⭐ 사용자 리뷰</span>
+          <button class="review-toggle-btn" onclick="toggleReview('${currentBrand}',${idx},this)" id="rtoggle-${currentBrand}-${idx}" data-name="${c.name}">리뷰 보기 ▼</button>
+        </div>
+        <div class="review-body" id="review-body-${currentBrand}-${idx}" style="display:none">
+          <div class="review-write">
+            <div class="review-write-top">
+              <input class="review-input-name" id="rname-${currentBrand}-${idx}" placeholder="닉네임" maxlength="20">
+              <div class="star-select" id="stars-${currentBrand}-${idx}" data-val="0">
+                <span class="star" onclick="setStar('${currentBrand}',${idx},1)" data-val="1">☆</span>
+                <span class="star" onclick="setStar('${currentBrand}',${idx},2)" data-val="2">☆</span>
+                <span class="star" onclick="setStar('${currentBrand}',${idx},3)" data-val="3">☆</span>
+                <span class="star" onclick="setStar('${currentBrand}',${idx},4)" data-val="4">☆</span>
+                <span class="star" onclick="setStar('${currentBrand}',${idx},5)" data-val="5">☆</span>
+              </div>
+            </div>
+            <textarea class="review-input-text" id="rtext-${currentBrand}-${idx}" placeholder="이 골프채 사용해보셨나요? 솔직한 리뷰를 남겨주세요!" rows="2"></textarea>
+            <button class="review-submit-btn" onclick="submitReview('${currentBrand}',${idx},this)" data-name="${c.name}">리뷰 등록</button>
+          </div>
+          <div class="review-list" id="review-list-${currentBrand}-${idx}">
+            <div style="text-align:center;padding:1rem;color:var(--muted);font-size:0.82rem">로딩 중...</div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('')||'<p style="text-align:center;padding:3rem;color:var(--muted)">해당 종류의 클럽 정보가 없습니다</p>';
+}
+
+// ══ 커뮤니티 ══
+let selectedCat = '전체';
+
+function selectCat(cat, btn) {
+  selectedCat = cat;
+  document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  loadPosts();
+}
+
+document.getElementById('write-body').addEventListener('input', function() {
+  document.getElementById('char-count').textContent = `${this.value.length} / 1000`;
+});
+
+async function loadPosts() {
+  const container = document.getElementById('posts-container');
+  container.innerHTML = `<div class="loading-box"><div class="loading-spinner"></div><p>게시글을 불러오는 중...</p></div>`;
+  try {
+    let filter = '?order=created_at.desc&limit=50';
+    if (selectedCat !== '전체') filter += `&category=eq.${encodeURIComponent(selectedCat)}`;
+    const posts = await supabase('GET', 'posts', null, filter);
+    if (!posts || posts.length === 0) {
+      container.innerHTML = `<div class="empty-box"><div class="empty-icon">📭</div><p>아직 게시글이 없어요!<br>첫 번째 글을 작성해보세요 😊</p></div>`;
+      return;
+    }
+    const colors = ['#2d6a3f','#1a3a5c','#5c1a3a','#b8860b','#4a4a8a','#6a2d2d'];
+    container.innerHTML = `<div class="posts-list">${posts.map(p => {
+      const col = colors[Math.abs((p.author||'').charCodeAt(0)||0) % colors.length];
+      const date = new Date(p.created_at).toLocaleDateString('ko-KR', {month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'});
+      const preview = (p.content||'').slice(0, 100) + ((p.content||'').length > 100 ? '...' : '');
+      return `<div class="post-card" onclick="openPost(${p.id})">
+        <div class="post-header">
+          <div class="avatar" style="background:${col}">${(p.author||'?')[0]}</div>
+          <div class="post-meta"><div class="post-author">${p.author||'익명'}</div><div class="post-date">${date}</div></div>
+          <span class="post-category-badge">${p.category||''}</span>
+        </div>
+        <div class="post-title">${p.title||''}</div>
+        <div class="post-body-preview">${preview}</div>
+      </div>`;
+    }).join('')}</div>`;
+  } catch(e) {
+    container.innerHTML = `<div class="empty-box"><div class="empty-icon">⚠️</div><p>게시글을 불러오지 못했어요<br>잠시 후 다시 시도해주세요</p></div>`;
+  }
+}
+
+async function submitPost() {
+  const author = document.getElementById('write-author').value.trim();
+  const category = document.getElementById('write-category').value;
+  const title = document.getElementById('write-title').value.trim();
+  const content = document.getElementById('write-body').value.trim();
+  if (!author) { showToast('닉네임을 입력해주세요!'); return; }
+  if (!title) { showToast('제목을 입력해주세요!'); return; }
+  if (!content) { showToast('내용을 입력해주세요!'); return; }
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = '등록 중...';
+  try {
+    await supabase('POST', 'posts', { author, category, title, content });
+    document.getElementById('write-author').value = '';
+    document.getElementById('write-title').value = '';
+    document.getElementById('write-body').value = '';
+    document.getElementById('char-count').textContent = '0 / 1000';
+    showToast('✅ 게시글이 등록됐어요!');
+    loadPosts();
+  } catch(e) {
+    showToast('❌ 등록에 실패했어요. 다시 시도해주세요.');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '게시하기 →';
+  }
+}
+
+async function openPost(postId) {
+  currentPostId = postId;
+  showPage('post-detail-page');
+  const content = document.getElementById('post-detail-content');
+  content.innerHTML = `<div class="loading-box"><div class="loading-spinner"></div><p>불러오는 중...</p></div>`;
+  try {
+    const posts = await supabase('GET', 'posts', null, `?id=eq.${postId}`);
+    const post = posts[0];
+    const date = new Date(post.created_at).toLocaleDateString('ko-KR', {year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'});
+    const colors = ['#2d6a3f','#1a3a5c','#5c1a3a','#b8860b','#4a4a8a'];
+    const col = colors[Math.abs((post.author||'').charCodeAt(0)||0) % colors.length];
+    content.innerHTML = `
+      <div class="post-detail-header">
+        <div class="post-detail-cat">${post.category||''}</div>
+        <div class="post-detail-title">${post.title||''}</div>
+        <div class="post-detail-meta">
+          <div class="avatar" style="background:${col};width:28px;height:28px;font-size:0.75rem">${(post.author||'?')[0]}</div>
+          <span>${post.author||'익명'}</span>
+          <span>${date}</span>
+        </div>
+      </div>
+      <div class="post-detail-body">${post.content||''}</div>
+      <div class="comments-box">
+        <div class="comments-title">💬 댓글</div>
+        <div class="comment-form">
+          <div class="comment-avatar">🙂</div>
+          <div class="comment-input-wrap">
+            <input class="comment-name-input" id="c-author" placeholder="닉네임" maxlength="20">
+            <textarea class="comment-textarea" id="c-content" placeholder="댓글을 입력하세요..." rows="2"></textarea>
+            <button class="comment-submit" onclick="submitComment(${postId})">댓글 등록</button>
+          </div>
+        </div>
+        <div id="comments-list"><div class="loading-box" style="padding:1rem"><div class="loading-spinner" style="width:20px;height:20px;border-width:2px"></div></div></div>
+      </div>`;
+    loadComments(postId);
+  } catch(e) {
+    content.innerHTML = `<div class="empty-box"><div class="empty-icon">⚠️</div><p>게시글을 불러오지 못했어요</p></div>`;
+  }
+}
+
+async function loadComments(postId) {
+  const list = document.getElementById('comments-list');
+  try {
+    const comments = await supabase('GET', 'comments', null, `?post_id=eq.${postId}&order=created_at.asc`);
+    if (!comments || comments.length === 0) {
+      list.innerHTML = `<div style="text-align:center;padding:1rem;color:var(--muted);font-size:0.85rem">아직 댓글이 없어요. 첫 댓글을 달아보세요! 😊</div>`;
+      return;
+    }
+    const colors = ['#2d6a3f','#1a3a5c','#5c1a3a','#b8860b','#4a4a8a'];
+    list.innerHTML = comments.map(c => {
+      const col = colors[Math.abs((c.author||'').charCodeAt(0)||0) % colors.length];
+      const date = new Date(c.created_at).toLocaleDateString('ko-KR', {month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'});
+      return `<div class="comment-item">
+        <div class="avatar" style="background:${col};width:32px;height:32px;font-size:0.78rem;flex-shrink:0">${(c.author||'?')[0]}</div>
+        <div class="comment-bubble">
+          <div class="comment-meta"><span class="comment-author">${c.author||'익명'}</span><span class="comment-date">${date}</span></div>
+          <div class="comment-text">${c.content||''}</div>
+        </div>
+      </div>`;
+    }).join('');
+  } catch(e) {
+    list.innerHTML = '';
+  }
+}
+
+async function submitComment(postId) {
+  const author = document.getElementById('c-author').value.trim();
+  const content = document.getElementById('c-content').value.trim();
+  if (!author) { showToast('닉네임을 입력해주세요!'); return; }
+  if (!content) { showToast('댓글 내용을 입력해주세요!'); return; }
+  try {
+    await supabase('POST', 'comments', { post_id: postId, author, content });
+    document.getElementById('c-author').value = '';
+    document.getElementById('c-content').value = '';
+    showToast('✅ 댓글이 등록됐어요!');
+    loadComments(postId);
+  } catch(e) {
+    showToast('❌ 댓글 등록에 실패했어요');
+  }
+}
+
+// ══ 골프채 데이터 ══
+const clubsData = {
+  taylormade: {
+    '드라이버': [
+      { name:'Qi10 드라이버', year:'2024', shaft:'Fujikura Ventus TR Blue (S)', weight:'198g', loft:'9° / 10.5°', launch:'중', traj:'중', dist:[210,260], tip:'AI로 설계된 카본 페이스가 반발력을 극대화해요. 미스샷에도 비거리 손실이 적어 아마추어에게 훌륭합니다.' },
+      { name:'Stealth2 드라이버', year:'2023', shaft:'Mitsubishi Kai\'li White (R)', weight:'195g', loft:'10.5°', launch:'중고', traj:'중', dist:[200,250], tip:'레드 카본 트위스트페이스로 탄도를 끌어올려 줍니다. 느린 스윙에서도 높은 탄도를 만들 수 있어요.' },
+    ],
+    '아이언': [
+      { name:'P790 아이언', year:'2023', shaft:'True Temper DG S300 (S)', weight:'258g(7번)', loft:'30.5° (7번)', launch:'중', traj:'중저', dist:[155,175], tip:'속이 빈 공동 구조로 단조 아이언 타감을 유지하면서 비거리도 뽑아냅니다. 싱글 핸디캡 도전하시는 분께 추천!' },
+    ],
+    '웨지': [
+      { name:'MG4 웨지 56°', year:'2024', shaft:'True Temper DG S200 (S)', weight:'295g', loft:'56°', launch:'저', traj:'저', dist:[75,105], tip:'히드라 스핀 그루브로 백스핀량이 뛰어납니다. 숏게임 성적을 빠르게 올리고 싶다면 이 웨지!' },
+    ],
+    '퍼터': [
+      { name:'Spider GTX 퍼터', year:'2024', shaft:'Steel (34인치)', weight:'340g', loft:'3°', launch:'—', traj:'—', dist:[0,0], tip:'말릿형 퍼터로 MOI가 높아 미스 퍼트에도 흔들림이 적어요. 직선 스트로크 타입에 잘 맞습니다.' },
+    ],
+  },
+  callaway: {
+    '드라이버': [
+      { name:'Paradym Ai Smoke Max', year:'2024', shaft:'Project X HZRDUS Black (S)', weight:'200g', loft:'9° / 10.5°', launch:'중', traj:'중', dist:[215,265], tip:'AI가 설계한 페이스로 전체 면적에서 골고루 볼 스피드를 냅니다. Max 버전은 훅/슬라이스 방지 효과도 있어요.' },
+    ],
+    '아이언': [
+      { name:'Apex Pro 24 아이언', year:'2024', shaft:'True Temper AMT Tour (S)', weight:'260g(7번)', loft:'31° (7번)', launch:'중', traj:'중', dist:[158,178], tip:'투어 프로도 사용하는 높은 완성도의 아이언. 타감이 부드럽고 탄도 컨트롤이 뛰어납니다.' },
+    ],
+    '웨지': [
+      { name:'JAWS Raw 웨지 58°', year:'2023', shaft:'True Temper DG (S)', weight:'292g', loft:'58°', launch:'저', traj:'저', dist:[70,95], tip:'날카로운 JAWS 그루브가 마찰력을 높여줍니다. 벙커나 러프에서 탈출력이 뛰어나요.' },
+    ],
+  },
+  ping: {
+    '드라이버': [
+      { name:'G430 Max 10K', year:'2024', shaft:'PING Tour (S)', weight:'195g', loft:'10.5°', launch:'중', traj:'중고', dist:[210,258], tip:'세계 최고 수준의 MOI(10,000+)로 미스샷에 가장 너그러운 드라이버 중 하나예요.' },
+    ],
+    '아이언': [
+      { name:'i230 아이언', year:'2023', shaft:'True Temper DG S300 (S)', weight:'255g(7번)', loft:'29° (7번)', launch:'중', traj:'중', dist:[162,180], tip:'탁월한 타감과 관용성의 균형. 핸디캡 8~18 수준의 중급 골퍼에게 이상적인 아이언입니다.' },
+    ],
+    '퍼터': [
+      { name:'ANSER 2D 퍼터', year:'2024', shaft:'PING Pistol (스틸)', weight:'340g', loft:'3°', launch:'—', traj:'—', dist:[0,0], tip:'50년 역사의 명품 퍼터 ANSER. 블레이드형으로 아크 스트로크 타입에 잘 맞아요.' },
+    ],
+  },
+  titleist: {
+    '드라이버': [
+      { name:'TSR3 드라이버', year:'2023', shaft:'Fujikura ROMBAX 6X3 (S)', weight:'198g', loft:'9° / 10°', launch:'중', traj:'중저', dist:[208,255], tip:'조정 기능이 풍부해서 자신의 구질에 맞게 세팅하는 재미가 있어요. 상급자 지향 드라이버.' },
+    ],
+    '아이언': [
+      { name:'T150 아이언', year:'2023', shaft:'Nippon Modus3 Tour 105 (S)', weight:'262g(7번)', loft:'30° (7번)', launch:'중', traj:'중', dist:[158,178], tip:'단조 아이언의 부드러운 타감을 원한다면 T150이 정답. 투어 프로들도 선호하는 클럽.' },
+    ],
+    '웨지': [
+      { name:'Vokey SM10 웨지', year:'2024', shaft:'True Temper DG S200 (S)', weight:'290g', loft:'52° / 56° / 60°', launch:'저', traj:'저', dist:[80,115], tip:'세계에서 가장 많이 팔리는 웨지! 로프트/솔/그라인드 조합만 수십 가지. 나만의 세팅을 찾아보세요.' },
+    ],
+  },
+  mizuno: {
+    '드라이버': [
+      { name:'ST-X 230 드라이버', year:'2023', shaft:'Fujikura Speeder Evolution VII (S)', weight:'197g', loft:'9.5°', launch:'중', traj:'중', dist:[212,260], tip:'미즈노 특유의 쾌감있는 타음과 타감. 드라이버도 미즈노를 원하는 분께 추천!' },
+    ],
+    '아이언': [
+      { name:'JPX923 Forged 아이언', year:'2023', shaft:'True Temper DG S300 (S)', weight:'257g(7번)', loft:'31° (7번)', launch:'중', traj:'중', dist:[158,178], tip:'"신이 만든 아이언"이라 불리는 미즈노 단조. 타감만큼은 세계 최고 수준이에요.' },
+    ],
+  },
+  srixon: {
+    '드라이버': [
+      { name:'ZX5 Mk II 드라이버', year:'2023', shaft:'Miyazaki C.Kua (S)', weight:'196g', loft:'9° / 10.5°', launch:'중', traj:'중', dist:[210,255], tip:'반발계수(CT)를 최대한 활용한 드라이버. 가격 대비 성능이 뛰어나요.' },
+    ],
+    '아이언': [
+      { name:'ZX5 Mk II 아이언', year:'2023', shaft:'Nippon NS Pro Modus3 (S)', weight:'256g(7번)', loft:'29° (7번)', launch:'중', traj:'중', dist:[162,182], tip:'다목적 아이언으로 타감과 관용성의 밸런스가 좋습니다. 가성비 최강!' },
+    ],
+  },
+  cobra: {
+    '드라이버': [
+      { name:'Darkspeed X 드라이버', year:'2024', shaft:'Fujikura Speeder NX (S)', weight:'197g', loft:'10.5°', launch:'중', traj:'중', dist:[212,262], tip:'AI 설계 페이스 + 가벼운 카본 크라운으로 스윙 스피드를 끌어올려줘요.' },
+    ],
+  },
+  cleveland: {
+    '웨지': [
+      { name:'RTX6 ZipCore 웨지 56°', year:'2024', shaft:'True Temper DG Spinner (S)', weight:'290g', loft:'56°', launch:'저', traj:'저', dist:[75,105], tip:'샌드웨지의 대명사. 벙커에서의 탈출력이 탁월합니다. 세팅은 56도부터 시작하세요!' },
+      { name:'RTX6 ZipCore 웨지 60°', year:'2024', shaft:'True Temper DG Spinner (S)', weight:'292g', loft:'60°', launch:'저', traj:'저', dist:[60,85], tip:'로브샷 전용. 높이 띄워 빠르게 멈추고 싶을 때 사용해요. 어느 정도 기술이 필요합니다.' },
+    ],
+  },
+  honma: {
+    '드라이버': [
+      { name:'BERES 11 드라이버', year:'2024', shaft:'ARMRQ MX (L)', weight:'182g', loft:'12°', launch:'고', traj:'고', dist:[148,190], tip:'혼마 특유의 럭셔리 소재와 장인 정신. 가볍고 부드러운 스윙으로 높은 탄도와 비거리를 만들어줘요.' },
+    ],
+    '아이언': [
+      { name:'BERES 11 아이언 세트', year:'2024', shaft:'ARMRQ Ω (L)', weight:'238g(7번)', loft:'28° (7번)', launch:'고', traj:'고', dist:[120,150], tip:'여성 골퍼를 위해 최적화된 가볍고 부드러운 아이언. 스윙이 빠르지 않아도 충분히 멀리 보낼 수 있어요.' },
+    ],
+  },
+  callaway_w: {
+    '드라이버': [
+      { name:'Paradym Ai Smoke HL 드라이버', year:'2024', shaft:'Aldila Ascent (L)', weight:'185g', loft:'12° / 13°', launch:'고', traj:'고', dist:[148,192], tip:'HL(High Launch)은 높이 뜨게 설계됐어요. 느린 스윙스피드에서도 비거리를 최대화합니다.' },
+    ],
+  },
+  taylormade_w: {
+    '드라이버': [
+      { name:'2025 ALL NEW 글로리 드라이버', year:'2025', shaft:'Speeder NX Gloire (L/A)', weight:'약 185g', loft:'10.5° / 11.5°', launch:'고', traj:'고', dist:[155,200], tip:'3세대 60X 카본 트위스트 페이스 탑재! 드로우 설계로 방향성이 뛰어나요. 한국 여성 골퍼를 위해 특별 개발된 제품이에요.' },
+      { name:'Qi10 HL 드라이버', year:'2024', shaft:'Speeder NX (L)', weight:'190g', loft:'12°', launch:'고', traj:'고', dist:[152,195], tip:'AI 페이스 기술에 여성 전용 라이트 샤프트 장착. 현재 여성 드라이버 중 최고 성능!' },
+    ],
+    '페어웨이우드': [
+      { name:'2025 ALL NEW 글로리 페어웨이우드', year:'2025', shaft:'Speeder NX Gloire FW (L/A)', weight:'약 195g', loft:'16° (3번) / 19.5° (5번)', launch:'고', traj:'고', dist:[155,190], tip:'번호별 최적 로프트로 설계돼 초보자도 높고 똑바른 탄도를 쉽게 만들 수 있어요.' },
+    ],
+    '유틸리티': [
+      { name:'2025 ALL NEW 글로리 레스큐', year:'2025', shaft:'Speeder NX Gloire Rescue (L/A)', weight:'약 200g', loft:'22° (#4) / 26° (#5)', launch:'고', traj:'고', dist:[145,178], tip:'롱아이언 대신 가방에 넣으세요! 높이 뜨고 멀리 가는 레스큐예요. 러프에서 탈출할 때 진가를 발휘해요.' },
+    ],
+    '아이언': [
+      { name:'2025 ALL NEW 글로리 아이언 세트', year:'2025', shaft:'Speeder NX Gloire Iron (L)', weight:'약 238g(7번)', loft:'29° (7번)', launch:'고', traj:'고', dist:[120,155], tip:'FLTD CG(번호별 최적 무게중심) 설계! 롱아이언은 높이 잘 뜨고, 숏아이언은 정확하게 떨어져요. 구성: #6~SW 7개' },
+    ],
+  },
+  ping_w: {
+    '드라이버': [
+      { name:'G Le3 드라이버', year:'2023', shaft:'ULT 240 Lite (L)', weight:'188g', loft:'12°', launch:'고', traj:'고', dist:[145,188], tip:'핑이 여성을 위해 독립 개발한 시리즈. 핑 특유의 방향성 + 가벼운 스윙감의 완벽한 조합이에요.' },
+    ],
+    '아이언': [
+      { name:'G Le3 아이언 세트', year:'2023', shaft:'ULT 240 Lite Iron (L)', weight:'236g(7번)', loft:'26° (7번)', launch:'고', traj:'고', dist:[118,148], tip:'넓은 솔이 지면을 잘 파고들어 뒤땅 걱정을 줄여줘요. 입문자 여성 골퍼에게 완벽해요!' },
+    ],
+  },
+  mizuno_w: {
+    '아이언': [
+      { name:'JPX923 Hot Metal HL 아이언 (L)', year:'2023', shaft:'Recoil Dart (L)', weight:'240g(7번)', loft:'27° (7번)', launch:'고', traj:'중고', dist:[122,155], tip:'미즈노 특유의 타감을 여성 골퍼도 즐길 수 있어요. 가볍고 잘 맞는 고성능 아이언!' },
+    ],
+  },
+  yamaha: {
+    '드라이버': [
+      { name:'inpres UD+2 드라이버 (L)', year:'2024', shaft:'Speeder Evolution IX (L)', weight:'180g', loft:'13°', launch:'고', traj:'고', dist:[140,182], tip:'UD+2는 "업(UP)"과 "드로우"를 동시에 만들어주는 야마하의 특허 기술! 공이 쉽게 뜨고 똑바로 가요.' },
+    ],
+    '아이언': [
+      { name:'inpres UD+2 아이언 세트 (L)', year:'2024', shaft:'Speeder Evolution IX Iron (L)', weight:'238g(7번)', loft:'25° (7번)', launch:'고', traj:'고', dist:[118,148], tip:'세트로 구매하면 드라이버부터 웨지까지 통일된 세팅감을 느낄 수 있어요.' },
+    ],
+  },
+  xxio: {
+    '드라이버': [
+      { name:'XXIO 13 드라이버 (L)', year:'2024', shaft:'XXIO SP-1100 (L)', weight:'175g', loft:'13°', launch:'고', traj:'고', dist:[138,180], tip:'세계에서 가장 가벼운 드라이버 중 하나! 스윙이 느린 분에게 완벽해요.' },
+    ],
+    '아이언': [
+      { name:'XXIO 13 아이언 세트 (L)', year:'2024', shaft:'XXIO SP-1100 Iron (L)', weight:'230g(7번)', loft:'25° (7번)', launch:'고', traj:'고', dist:[115,145], tip:'초경량 세트. 18홀 내내 피로 없이 일관된 스윙을 유지할 수 있어요.' },
+    ],
+  },
+  pxg_w: {
+    '드라이버': [
+      { name:'PXG 0211 드라이버 (L)', year:'2024', shaft:'Aldila Ascent (L)', weight:'188g', loft:'12°', launch:'고', traj:'고', dist:[148,190], tip:'밀리터리 감성의 독특한 디자인. 성능과 개성 모두 원하는 분께 추천!' },
+    ],
+    '아이언': [
+      { name:'PXG 0211 아이언 세트 (L)', year:'2024', shaft:'Aldila NV (L)', weight:'242g(7번)', loft:'26° (7번)', launch:'고', traj:'중고', dist:[120,150], tip:'PXG의 공격적인 기술을 가성비 있게 담은 모델. 남다른 클럽을 원하신다면 PXG!' },
+    ],
+  },
+};
+
+// 페이지 로드시 커뮤니티 게시글 미리 로드
+window.addEventListener('load', () => {
+  // 커뮤니티 페이지 진입시 자동 로드를 위해 준비만
+});
+
+// 커뮤니티 페이지 진입시 게시글 로드
+const origShowPage = showPage;
+
+// ══ 리뷰 기능 ══
+const starState = {};
+
+function toggleReview(brandId, idx, toggleBtn) {
+  const clubName = toggleBtn.dataset.name;
+  const body = document.getElementById('review-body-'+brandId+'-'+idx);
+  const toggleEl = document.getElementById('rtoggle-'+brandId+'-'+idx);
+  if (body.style.display === 'none') {
+    body.style.display = 'block';
+    toggleEl.textContent = '리뷰 닫기 ▲';
+    loadReviews(brandId, idx, clubName);
+  } else {
+    body.style.display = 'none';
+    toggleEl.textContent = '리뷰 보기 ▼';
+  }
+}
+
+function setStar(brandId, idx, val) {
+  const key = `${brandId}-${idx}`;
+  starState[key] = val;
+  const stars = document.querySelectorAll(`#stars-${brandId}-${idx} .star`);
+  stars.forEach(s => {
+    s.textContent = parseInt(s.dataset.val) <= val ? '★' : '☆';
+    s.classList.toggle('on', parseInt(s.dataset.val) <= val);
+  });
+}
+
+async function loadReviews(brandId, idx, clubName) {
+  const list = document.getElementById(`review-list-${brandId}-${idx}`);
+  try {
+    const reviews = await supabase('GET', 'reviews', null,
+      `?brand_id=eq.${encodeURIComponent(brandId)}&club_name=eq.${encodeURIComponent(clubName)}&order=created_at.desc`);
+    if (!reviews || reviews.length === 0) {
+      list.innerHTML = '<div style="text-align:center;padding:1rem;color:var(--muted);font-size:0.82rem">아직 리뷰가 없어요. 첫 번째 리뷰를 남겨주세요! 😊</div>';
+      return;
+    }
+    const colors = ['#2d6a3f','#1a3a5c','#5c1a3a','#b8860b','#4a4a8a'];
+    list.innerHTML = reviews.map(r => {
+      const col = colors[Math.abs((r.author||'').charCodeAt(0)||0) % colors.length];
+      const date = new Date(r.created_at).toLocaleDateString('ko-KR', {month:'long',day:'numeric'});
+      const stars = '★'.repeat(r.rating||0) + '☆'.repeat(5-(r.rating||0));
+      return `<div class="review-item">
+        <div class="avatar" style="background:${col};width:32px;height:32px;font-size:0.78rem;flex-shrink:0">${(r.author||'?')[0]}</div>
+        <div class="review-bubble">
+          <div class="review-meta">
+            <span class="review-author">${r.author||'익명'}</span>
+            <span class="review-stars">${stars}</span>
+            <span class="review-date">${date}</span>
+          </div>
+          <div class="review-text">${r.content||''}</div>
+        </div>
+      </div>`;
+    }).join('');
+  } catch(e) {
+    list.innerHTML = '<div style="text-align:center;padding:1rem;color:var(--muted);font-size:0.82rem">리뷰를 불러오지 못했어요</div>';
+  }
+}
+
+async function submitReview(brandId, idx, submitBtn) {
+  const clubName = submitBtn.dataset.name;
+  const author = document.getElementById(`rname-${brandId}-${idx}`).value.trim();
+  const content = document.getElementById(`rtext-${brandId}-${idx}`).value.trim();
+  const rating = starState[`${brandId}-${idx}`] || 0;
+  if (!author) { showToast('닉네임을 입력해주세요!'); return; }
+  if (!rating) { showToast('별점을 선택해주세요!'); return; }
+  if (!content) { showToast('리뷰 내용을 입력해주세요!'); return; }
+  try {
+    await supabase('POST', 'reviews', { brand_id: brandId, club_name: clubName, author, rating, content });
+    document.getElementById(`rname-${brandId}-${idx}`).value = '';
+    document.getElementById(`rtext-${brandId}-${idx}`).value = '';
+    setStar(brandId, idx, 0);
+    starState[`${brandId}-${idx}`] = 0;
+    document.querySelectorAll(`#stars-${brandId}-${idx} .star`).forEach(s => {
+      s.textContent = '☆'; s.classList.remove('on');
+    });
+    showToast('✅ 리뷰가 등록됐어요!');
+    loadReviews(brandId, idx, clubName);
+  } catch(e) {
+    showToast('❌ 등록에 실패했어요');
+  }
+}
+
+</script>
+</body>
+</html>
