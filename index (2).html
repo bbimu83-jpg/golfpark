@@ -568,10 +568,10 @@ function typeEmoji(t) {
   return {드라이버:'🚀',아이언:'🏌️',페어웨이우드:'🌲',하이브리드:'🔀',유틸리티:'🔀',웨지:'🪙',퍼터:'🎯'}[t]||'🏷️';
 }
 
-function selectType(type, btn) {
+function selectType(type, tabBtn) {
   currentType = type;
   document.querySelectorAll('.type-tab').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+  tabBtn.classList.add('active');
   renderClubs();
 }
 
@@ -634,10 +634,10 @@ function renderClubs() {
 // ══ 커뮤니티 ══
 let selectedCat = '전체';
 
-function selectCat(cat, btn) {
+function selectCat(cat, catBtn) {
   selectedCat = cat;
   document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+  catBtn.classList.add('active');
   loadPosts();
 }
 
@@ -684,9 +684,9 @@ async function submitPost() {
   if (!author) { showToast('닉네임을 입력해주세요!'); return; }
   if (!title) { showToast('제목을 입력해주세요!'); return; }
   if (!content) { showToast('내용을 입력해주세요!'); return; }
-  const btn = document.getElementById('submit-btn');
-  btn.disabled = true;
-  btn.textContent = '등록 중...';
+  const submitPostBtn = document.getElementById('submit-btn');
+  submitPostBtn.disabled = true;
+  submitPostBtn.textContent = '등록 중...';
   try {
     await supabase('POST', 'posts', { author, category, title, content });
     document.getElementById('write-author').value = '';
@@ -698,8 +698,8 @@ async function submitPost() {
   } catch(e) {
     showToast('❌ 등록에 실패했어요. 다시 시도해주세요.');
   } finally {
-    btn.disabled = false;
-    btn.textContent = '게시하기 →';
+    submitPostBtn.disabled = false;
+    submitPostBtn.textContent = '게시하기 →';
   }
 }
 
@@ -933,8 +933,6 @@ window.addEventListener('load', () => {
   // 커뮤니티 페이지 진입시 자동 로드를 위해 준비만
 });
 
-// 커뮤니티 페이지 진입시 게시글 로드
-const origShowPage = showPage;
 
 // ══ 리뷰 기능 ══
 const starState = {};
